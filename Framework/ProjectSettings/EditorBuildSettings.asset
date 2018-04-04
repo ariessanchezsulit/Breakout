@@ -4,4 +4,10 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+  m_Scenes:
+  - enabled: 1
+    path: Assets/Framework/System/Scenes/System.unity
+    guid: 8eadcb7c7fe5749039b186e3da798bab
+  - enabled: 1
+    path: Assets/Sandbox/Shooting/Scenes/Gesture.unity
+    guid: 3df7e7dc3d2141c4897187b59abbc4a8
