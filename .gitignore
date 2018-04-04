@@ -1,0 +1,88 @@
+# ============================ #
+# Framework Unity Project #
+# ============================ #
+Framework/Temp/*
+Framework/Obj/*
+Framework/UnityGenerated/*
+Framework/Library/*
+
+# ===================================== #
+# Visual Studio / MonoDevelop generated #
+# ===================================== #
+Framework/ExportedObj/
+Framework/*.svd
+Framework/*.userprefs
+Framework/*.csproj
+Framework/*.pidb
+Framework/*.suo
+Framework/*.sln
+Framework/*.user
+Framework/*.unityproj
+Framework/*.booproj
+Framework/.vs/Framework/v14/.suo
+
+# ================ #
+# Plugin Generated #
+# ================ #
+Framework/Assets/ThirdParty/PanicButton/Editor/reloader.cs
+Framework/Assets/ThirdParty/PanicButton/Editor/reloader.cs.meta
+Framework/Assets/Plugins/Frameworks/iOS/AdSupport.framework.meta
+Framework/Assets/Plugins/Frameworks/iOS/CoreData.framework.meta
+Framework/Assets/Plugins/Android/GoogleMobileAdsPlugin.meta
+Framework/Assets/Plugins/iOS/GoogleMobileAdsPlugin/GoogleMobileAds.framework/Versions/A/*.meta
+Framework/Assets/Plugins/iOS/GoogleMobileAdsPlugin/GoogleMobileAds.framework/Versions/A/Headers
+Framework/Assets/Plugins/iOS/GoogleMobileAdsPlugin/GoogleMobileAds.framework/Versions/A/*.meta
+Framework/Assets/Plugins/iOS/GoogleMobileAdsPlugin/GoogleMobileAds.framework/Versions/A/Headers
+Framework/Assets/Plugins/iOS/GoogleMobileAdsPlugin/GADUBanner.h.meta
+Framework/Assets/Plugins/iOS/GoogleMobileAdsPlugin/GADUBanner.m.meta
+Framework/Assets/Plugins/iOS/GoogleMobileAdsPlugin/GADUInterface.m.meta
+Framework/Assets/Plugins/iOS/GoogleMobileAdsPlugin/GADUInterstitial.h.meta
+Framework/Assets/Plugins/iOS/GoogleMobileAdsPlugin/GADUInterstitial.m.meta
+Framework/Assets/Plugins/iOS/GoogleMobileAdsPlugin/GADUObjectCache.h.meta
+Framework/Assets/Plugins/iOS/GoogleMobileAdsPlugin/GADUObjectCache.m.meta
+Framework/Assets/Plugins/iOS/GoogleMobileAdsPlugin/GADURequest.h.meta
+Framework/Assets/Plugins/iOS/GoogleMobileAdsPlugin/GADURequest.m.meta
+Framework/Assets/Plugins/iOS/GoogleMobileAdsPlugin/GADUTypes.h.meta
+Framework/Assets/Plugins/iOS/GoogleMobileAdsPlugin/GAI.h.meta
+Framework/Assets/Plugins/iOS/GoogleMobileAdsPlugin/GAIDictionaryBuilder.h.meta
+Framework/Assets/Plugins/iOS/GoogleMobileAdsPlugin/GAIEcommerceFields.h.meta
+Framework/Assets/Plugins/iOS/GoogleMobileAdsPlugin/GAIEcommerceProduct.h.meta
+Framework/Assets/Plugins/iOS/GoogleMobileAdsPlugin/GAIEcommerceProductAction.h.meta
+Framework/Assets/Plugins/iOS/GoogleMobileAdsPlugin/GAIEcommercePromotion.h.meta
+Framework/Assets/Plugins/iOS/GoogleMobileAdsPlugin/GAIFields.h.meta
+Framework/Assets/Plugins/iOS/GoogleMobileAdsPlugin/GAIHandler.h.meta
+Framework/Assets/Plugins/iOS/GoogleMobileAdsPlugin/GAIHandler.m.meta
+Framework/Assets/Plugins/iOS/GoogleMobileAdsPlugin/GAILogger.h.meta
+Framework/Assets/Plugins/iOS/GoogleMobileAdsPlugin/GAITrackedViewController.h.meta
+Framework/Assets/Plugins/iOS/GoogleMobileAdsPlugin/GAITracker.h.meta
+Framework/Assets/Plugins/iOS/GoogleMobileAdsPlugin/libGoogleAnalyticsServices.a.meta
+Framework/Assets/ThirdParty/FacebookSDK/Plugins/Android/libs/bolts-android-1.4.0.jar.meta
+Framework/Assets/ThirdParty/FacebookSDK/Plugins/Android/libs/bolts-applinks-1.4.0.jar.meta
+Framework/Assets/ThirdParty/FacebookSDK/Plugins/Android/libs/bolts-tasks-1.4.0.jar.meta
+Framework/Assets/ThirdParty/FacebookSDK/Plugins/Android/libs/cardview-v7-23.2.1.aar.meta
+Framework/Assets/ThirdParty/FacebookSDK/Plugins/Android/libs/facebook-android-sdk-4.11.0.aar.meta
+Framework/Assets/ThirdParty/FacebookSDK/Plugins/iOS/Bolts.framework.meta
+Framework/Assets/ThirdParty/FacebookSDK/Plugins/iOS/FBSDKCoreKit.framework.meta
+Framework/Assets/ThirdParty/FacebookSDK/Plugins/iOS/FBSDKLoginKit.framework.meta
+Framework/Assets/ThirdParty/FacebookSDK/Plugins/iOS/FBSDKShareKit.framework.meta
+
+# ============ #
+# OS generated #
+# ============ #
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+Icon?
+ehthumbs.db
+Thumbs.db
+thumbs.db
+Builds
+*.csproj
+*.sln
+Framework/Assets/__MACOSX/
+Framework/Assets/__MACOSX.meta
+Framework/.vs/Framework/v15/Server/sqlite3/db.lock
+Framework/.vs/Framework/v15/.suo
+Framework/.vs/Framework/v15/Server/sqlite3/storage.ide
