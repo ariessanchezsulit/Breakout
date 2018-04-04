@@ -8,6 +8,11 @@
         /// <summary>
         /// The ID of the scene.
         /// </summary>
-        public EScene SceneName { get; set; }
+        public EScene Scene { get; set; }
+
+        /// <summary>
+        /// The name of the scene.
+        /// </summary>
+        public string SceneName { get; set; }
     }
 }

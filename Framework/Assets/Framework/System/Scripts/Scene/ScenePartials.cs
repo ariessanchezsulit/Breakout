@@ -24,11 +24,11 @@ namespace Framework
     using CColor = Common.Extensions.Color;
     using UScene = UnityEngine.SceneManagement.Scene;
 
-    #region Partial for Scene Loading
-    
+    #region Scene extension (Load, Unload, and Wait)
+
     public partial class Scene : BaseBehavior
     {
-        private void PassDataToScene<T>(string scene, ISceneData data) where T : Scene
+        public void PassDataToScene<T>(string scene, ISceneData data) where T : Scene
         {
             UScene loadedScene = SceneManager.GetSceneByName(scene);
             List<GameObject> objects = new List<GameObject>(loadedScene.GetRootGameObjects());
@@ -40,12 +40,41 @@ namespace Framework
             // pass the data 
             items.FirstOrDefault().SceneData = data;
         }
+        
+        /// <summary>
+        /// Loads the given scene.
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="scene"></param>
+        /// <param name="eScene">The type/ID of the scene to be loaded</param>
+        /// <returns></returns>
+        public Promise LoadScenePromise<T>(string sceneName) where T : Scene
+        {
+            Deferred deferred = new Deferred();
+            StartCoroutine(LoadSceneAsync<T>(deferred, sceneName));
+            return deferred.Promise;
+        }
 
         public IEnumerator LoadSceneAsync<T>(Deferred deffered, string scene) where T : Scene
         {
             AsyncOperation operation = SceneManager.LoadSceneAsync(scene, LoadSceneMode.Single);
             yield return operation;
             deffered.Resolve();
+        }
+
+        /// <summary>
+        /// Loads the given scene with data.
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="scene"></param>
+        /// <param name="sScenee">The name of the scene to be loaded</param>
+        /// <param name="data">Data to be passed to the scene</param>
+        /// <returns></returns>
+        public Promise LoadScenePromise<T>(string sScenee, ISceneData data) where T : Scene
+        {
+            Deferred deferred = new Deferred();
+            StartCoroutine(LoadSceneAsync<T>(deferred, sScenee, data));
+            return deferred.Promise;
         }
 
         public IEnumerator LoadSceneAsync<T>(Deferred deffered, string scene, ISceneData data) where T : Scene
@@ -55,6 +84,20 @@ namespace Framework
 
             PassDataToScene<T>(scene, data);
             deffered.Resolve();
+        }
+
+        /// <summary>
+        /// Loads the given scene.
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="scene"></param>
+        /// <param name="eScene">The type/ID of the scene to be loaded</param>
+        /// <returns></returns>
+        public Promise LoadScenePromise<T>(EScene eScene) where T : Scene
+        {
+            Deferred deferred = new Deferred();
+            StartCoroutine(LoadSceneAsync<T>(deferred, eScene));
+            return deferred.Promise;
         }
 
         /// <summary>
@@ -72,7 +115,22 @@ namespace Framework
             yield return operation;
             deffered.Resolve();
 
-            this.Publish(new OnLoadSceneSignal() { SceneName = scene });
+            this.Publish(new OnLoadSceneSignal() { Scene = scene });
+        }
+
+        /// <summary>
+        /// Loads the given scene with data.
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="scene"></param>
+        /// <param name="eScene">The type/ID of the scene to be loaded</param>
+        /// <param name="data">Data to be passed to the scene</param>
+        /// <returns></returns>
+        public Promise LoadScenePromise<T>(EScene eScene, ISceneData data) where T : Scene
+        {
+            Deferred deferred = new Deferred();
+            StartCoroutine(LoadSceneAsync<T>(deferred, eScene, data));
+            return deferred.Promise;
         }
 
         public IEnumerator LoadSceneAsync<T>(Deferred deffered, EScene scene, ISceneData data) where T : Scene
@@ -89,7 +147,20 @@ namespace Framework
             PassDataToScene<T>(scene.ToString(), data);
             deffered.Resolve();
 
-            this.Publish(new OnLoadSceneSignal() { SceneName = scene });
+            this.Publish(new OnLoadSceneSignal() { Scene = scene });
+        }
+
+        /// <summary>
+        /// Loads the given scene additively.
+        /// </summary>
+        /// <param name="scene"></param>
+        /// <param name="sScenee"></param>
+        /// <returns></returns>
+        public Promise LoadSceneAdditivePromise(string sScenee)
+        {
+            Deferred deferred = new Deferred();
+            StartCoroutine(LoadAdditiveSceneAsync(deferred, sScenee));
+            return deferred.Promise;
         }
 
         public IEnumerator LoadAdditiveSceneAsync(Deferred deffered, string scene)
@@ -99,13 +170,65 @@ namespace Framework
             deffered.Resolve();
         }
 
+        /// <summary>
+        /// Loads the given scene additively.
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="scene"></param>
+        /// <param name="eScene"></param>
+        /// <returns></returns>
+        public Promise LoadSceneAdditivePromise<T>(EScene eScene) where T : Scene
+        {
+            Deferred deferred = new Deferred();
+            StartCoroutine(LoadAdditiveSceneAsync<T>(deferred, eScene));
+            return deferred.Promise;
+        }
+
         public IEnumerator LoadAdditiveSceneAsync<T>(Deferred deffered, EScene scene) where T : Scene
         {
             AsyncOperation operation = SceneManager.LoadSceneAsync(scene.ToString(), LoadSceneMode.Additive);
             yield return operation;
             deffered.Resolve();
 
-            this.Publish(new OnLoadSceneSignal() { SceneName = scene });
+            this.Publish(new OnLoadSceneSignal() { Scene = scene });
+        }
+
+        /// <summary>
+        /// Loads the given scene additively.
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="scene"></param>
+        /// <param name="eScene"></param>
+        /// <returns></returns>
+        public Promise LoadSceneAdditivePromise<T>(string sceneName) where T : Scene
+        {
+            Deferred deferred = new Deferred();
+            StartCoroutine(LoadAdditiveSceneAsync<T>(deferred, sceneName));
+            return deferred.Promise;
+        }
+
+        public IEnumerator LoadAdditiveSceneAsync<T>(Deferred deffered, string sceneName) where T : Scene
+        {
+            AsyncOperation operation = SceneManager.LoadSceneAsync(sceneName, LoadSceneMode.Additive);
+            yield return operation;
+            deffered.Resolve();
+
+            this.Publish(new OnLoadSceneSignal() { SceneName = sceneName });
+        }
+
+        /// <summary>
+        /// Loads the given scene additively with data.
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="scene"></param>
+        /// <param name="eScene"></param>
+        /// <param name="data"></param>
+        /// <returns></returns>
+        public Promise LoadSceneAdditivePromise<T>(EScene eScene, ISceneData data) where T : Scene
+        {
+            Deferred deferred = new Deferred();
+            StartCoroutine(LoadAdditiveSceneAsync<T>(deferred, eScene, data));
+            return deferred.Promise;
         }
 
         public IEnumerator LoadAdditiveSceneAsync<T>(Deferred deffered, EScene scene, ISceneData data) where T : Scene
@@ -116,7 +239,33 @@ namespace Framework
             PassDataToScene<T>(scene.ToString(), data);
             deffered.Resolve();
 
-            this.Publish(new OnLoadSceneSignal() { SceneName = scene });
+            this.Publish(new OnLoadSceneSignal() { Scene = scene });
+        }
+
+        /// <summary>
+        /// Loads the given scene additively with data.
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="scene"></param>
+        /// <param name="eScene"></param>
+        /// <param name="data"></param>
+        /// <returns></returns>
+        public Promise LoadSceneAdditivePromise<T>(string sceneName, ISceneData data) where T : Scene
+        {
+            Deferred deferred = new Deferred();
+            StartCoroutine(LoadAdditiveSceneAsync<T>(deferred, sceneName, data));
+            return deferred.Promise;
+        }
+
+        public IEnumerator LoadAdditiveSceneAsync<T>(Deferred deffered, string sceneName, ISceneData data) where T : Scene
+        {
+            AsyncOperation operation = SceneManager.LoadSceneAsync(sceneName, LoadSceneMode.Additive);
+            yield return operation;
+
+            PassDataToScene<T>(sceneName, data);
+            deffered.Resolve();
+
+            this.Publish(new OnLoadSceneSignal() { SceneName = sceneName });
         }
 
         public Promise EndFramePromise()
@@ -126,19 +275,19 @@ namespace Framework
             return deferred.Promise;
         }
 
-        public Promise WaitPromise(float seconds = 1.0f)
-        {
-            Deferred deferred = new Deferred();
-            this.StartCoroutine(this.Wait(deferred, seconds));
-            return deferred.Promise;
-        }
-
         protected IEnumerator EndFrame(Deferred deferred)
         {
             yield return null;
             deferred.Resolve();
         }
 
+        public Promise WaitPromise(float seconds = 1.0f)
+        {
+            Deferred deferred = new Deferred();
+            this.StartCoroutine(this.Wait(deferred, seconds));
+            return deferred.Promise;
+        }
+        
         protected IEnumerator Wait(Deferred deferred, float seconds = 1.0f)
         {
             yield return null;

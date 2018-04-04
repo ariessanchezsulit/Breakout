@@ -56,11 +56,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: e75789c996de6154c9b26b09043b5b4b, type: 2}
   - {fileID: 11400000, guid: 3eb913142c9450b4db16368013fd8d8f, type: 2}
   - {fileID: 11400000, guid: d69dff0e6f7752841895d99f6ac828f5, type: 2}
-  - {fileID: 114097191298201064, guid: ce6a0cf3788eceb42b3ec330da6964a7, type: 2}
-  - {fileID: 114731602415456202, guid: ce6a0cf3788eceb42b3ec330da6964a7, type: 2}
-  - {fileID: 114000014200372208, guid: 849ff3e6e1414454187a6ae7d2479358, type: 2}
   - {fileID: 114000011719039692, guid: 41978ea2a587eda4bbde3c9090d466f6, type: 2}
-  - {fileID: 114000011408304186, guid: 2b87522ca4c44824590206ab33e1de46, type: 2}
   _values:
   - _keys: []
     _values: []
@@ -72,33 +68,11 @@ MonoBehaviour:
     _values: []
     _target: {fileID: 11400000, guid: d69dff0e6f7752841895d99f6ac828f5, type: 2}
   - _keys:
-    - DefaultBehaviorEditor._SceneType.EditProperty
-    _values:
-    - _showDropdown: 0
-      _serializedIsActive: 1
-    _target: {fileID: 114097191298201064, guid: ce6a0cf3788eceb42b3ec330da6964a7,
-      type: 2}
-  - _keys: []
-    _values: []
-    _target: {fileID: 114731602415456202, guid: ce6a0cf3788eceb42b3ec330da6964a7,
-      type: 2}
-  - _keys: []
-    _values: []
-    _target: {fileID: 114000014200372208, guid: 849ff3e6e1414454187a6ae7d2479358,
-      type: 2}
-  - _keys:
     - DefaultBehaviorEditor._Button.EditProperty
     _values:
     - _showDropdown: 0
       _serializedIsActive: 1
     _target: {fileID: 114000011719039692, guid: 41978ea2a587eda4bbde3c9090d466f6,
-      type: 2}
-  - _keys:
-    - DefaultBehaviorEditor._SceneType.EditProperty
-    _values:
-    - _showDropdown: 0
-      _serializedIsActive: 1
-    _target: {fileID: 114000011408304186, guid: 2b87522ca4c44824590206ab33e1de46,
       type: 2}
 --- !u!114 &114770282670114888
 MonoBehaviour:
@@ -115,11 +89,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: e75789c996de6154c9b26b09043b5b4b, type: 2}
   - {fileID: 11400000, guid: 3eb913142c9450b4db16368013fd8d8f, type: 2}
   - {fileID: 11400000, guid: d69dff0e6f7752841895d99f6ac828f5, type: 2}
-  - {fileID: 114097191298201064, guid: ce6a0cf3788eceb42b3ec330da6964a7, type: 2}
-  - {fileID: 114731602415456202, guid: ce6a0cf3788eceb42b3ec330da6964a7, type: 2}
-  - {fileID: 114000014200372208, guid: 849ff3e6e1414454187a6ae7d2479358, type: 2}
   - {fileID: 114000011719039692, guid: 41978ea2a587eda4bbde3c9090d466f6, type: 2}
-  - {fileID: 114000011408304186, guid: 2b87522ca4c44824590206ab33e1de46, type: 2}
   _values:
   - _keys: []
     _values: []
@@ -132,21 +102,5 @@ MonoBehaviour:
     _target: {fileID: 11400000, guid: d69dff0e6f7752841895d99f6ac828f5, type: 2}
   - _keys: []
     _values: []
-    _target: {fileID: 114097191298201064, guid: ce6a0cf3788eceb42b3ec330da6964a7,
-      type: 2}
-  - _keys: []
-    _values: []
-    _target: {fileID: 114731602415456202, guid: ce6a0cf3788eceb42b3ec330da6964a7,
-      type: 2}
-  - _keys: []
-    _values: []
-    _target: {fileID: 114000014200372208, guid: 849ff3e6e1414454187a6ae7d2479358,
-      type: 2}
-  - _keys: []
-    _values: []
     _target: {fileID: 114000011719039692, guid: 41978ea2a587eda4bbde3c9090d466f6,
-      type: 2}
-  - _keys: []
-    _values: []
-    _target: {fileID: 114000011408304186, guid: 2b87522ca4c44824590206ab33e1de46,
       type: 2}

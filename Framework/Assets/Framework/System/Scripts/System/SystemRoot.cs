@@ -21,6 +21,8 @@ using CColor = Common.Extensions.Color;
 
 namespace Framework
 {
+    using Sandbox.Shooting;
+
     public class SystemRoot : Scene
     {
         [SerializeField]
@@ -69,6 +71,8 @@ namespace Framework
             base.Awake();
             
             Install();
+
+            LoadSceneAdditivePromise("Shooting");
         }
 
         protected override void OnDestroy()
