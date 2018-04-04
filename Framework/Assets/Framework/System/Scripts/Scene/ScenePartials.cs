@@ -36,11 +36,11 @@ namespace Framework
             List<T> items = scenes.ToArray<T>();
 
             Assertion.Assert(items.Count > 0, "Error! Scene:" + gameObject.name);
-            
+
             // pass the data 
             items.FirstOrDefault().SceneData = data;
         }
-        
+
         /// <summary>
         /// Loads the given scene.
         /// </summary>
@@ -268,6 +268,34 @@ namespace Framework
             this.Publish(new OnLoadSceneSignal() { SceneName = sceneName });
         }
 
+        public Promise UnloadScenePromise(EScene scene)
+        {
+            Deferred deferred = new Deferred();
+            StartCoroutine(UnoadSceneAsync(deferred, scene));
+            return deferred.Promise;
+        }
+
+        public IEnumerator UnoadSceneAsync(Deferred deffered, EScene scene)
+        {
+            AsyncOperation operation = SceneManager.UnloadSceneAsync(scene.ToString());
+            yield return operation;
+            deffered.Resolve();
+        }
+
+        public Promise UnloadScenePromise(string sceneName)
+        {
+            Deferred deferred = new Deferred();
+            StartCoroutine(UnoadSceneAsync(deferred, sceneName));
+            return deferred.Promise;
+        }
+
+        public IEnumerator UnoadSceneAsync(Deferred deffered, string scene)
+        {
+            AsyncOperation operation = SceneManager.UnloadSceneAsync(scene);
+            yield return operation;
+            deffered.Resolve();
+        }
+
         public Promise EndFramePromise()
         {
             Deferred deferred = new Deferred();
@@ -287,7 +315,7 @@ namespace Framework
             this.StartCoroutine(this.Wait(deferred, seconds));
             return deferred.Promise;
         }
-        
+
         protected IEnumerator Wait(Deferred deferred, float seconds = 1.0f)
         {
             yield return null;
@@ -295,5 +323,24 @@ namespace Framework
             deferred.Resolve();
         }
     }
+    #endregion
+
+    #region Scene extension (Debug)
+
+    public partial class Scene : BaseBehavior
+    {
+        [InspectorButton]
+        public void LoadTestScene()
+        {
+            this.LoadSceneAdditivePromise("Shooting");
+        }
+
+        [InspectorButton]
+        public void UnloadTestScene()
+        {
+            UnloadScenePromise("Shooting");
+        }
+    }
+
     #endregion
 }

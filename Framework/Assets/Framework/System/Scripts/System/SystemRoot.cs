@@ -71,8 +71,6 @@ namespace Framework
             base.Awake();
             
             Install();
-
-            LoadSceneAdditivePromise("Shooting");
         }
 
         protected override void OnDestroy()
