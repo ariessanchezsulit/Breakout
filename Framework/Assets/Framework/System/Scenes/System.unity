@@ -216,19 +216,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2ba6aac5aab0c43a7ae22fbb0d5c065c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _objectReferences:
-  - {fileID: 1976043573}
+  _objectReferences: []
   _serializedStateKeys:
   - _SceneType
   - sceneClassList
   - _Installers
-  - CanvasList
   - ButtonMap
   _serializedStateValues:
   - '"System"'
   - '[{"name":"Invalid"},{"name":"System"},{"name":"Services"},{"name":"Audio"},{"name":"Splash"},{"name":"Preloader"},{"name":"Login"},{"name":"Home"},{"name":"Coins"},{"name":"Shop"},{"name":"Settings"},{"name":"Game"},{"name":"Results"},{"name":"PopupCollection"},{"name":"Back"},{"name":"Currency"},{"name":"Background"},{"name":"MoreGames"},{"name":"Cleaner"},{"name":"Max"}]'
   - '[]'
-  - '[0]'
   - '{}'
   _Installers: []
   sceneClassList:
@@ -255,8 +252,6 @@ MonoBehaviour:
   _SceneTypeString: System
   _SceneType: 1
   _IsPersistent: 1
-  CanvasList:
-  - {fileID: 1976043573}
   _SystemCamera: {fileID: 1632790966}
   _SystemVersion: {fileID: 481003345}
 --- !u!4 &481003347
@@ -406,7 +401,7 @@ RectTransform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1181481848}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 922.99994, y: -744.4608, z: 0}
+  m_LocalPosition: {x: 922.99994, y: -616.839, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1976043570}
@@ -448,8 +443,6 @@ MonoBehaviour:
   _keys:
   - {fileID: 481003346}
   - {fileID: 481003343}
-  - {fileID: 0}
-  - {fileID: 0}
   _values:
   - _keys: []
     _values: []
@@ -457,12 +450,6 @@ MonoBehaviour:
   - _keys: []
     _values: []
     _target: {fileID: 481003343}
-  - _keys: []
-    _values: []
-    _target: {fileID: 0}
-  - _keys: []
-    _values: []
-    _target: {fileID: 0}
 --- !u!114 &1305508064
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -477,33 +464,16 @@ MonoBehaviour:
   _keys:
   - {fileID: 481003346}
   - {fileID: 481003343}
-  - {fileID: 0}
-  - {fileID: 0}
   _values:
+  - _keys:
+    - DefaultBehaviorEditor._SceneType.EditProperty
+    _values:
+    - _showDropdown: 0
+      _serializedIsActive: 1
+    _target: {fileID: 481003346}
   - _keys: []
     _values: []
-    _target: {fileID: 481003346}
-  - _keys:
-    - DefaultBehaviorEditor.CanvasList.EditProperty.0.PlaneDistance.EditProperty
-    - DefaultBehaviorEditor.CanvasList.EditProperty.1.PlaneDistance.EditProperty
-    _values:
-    - _showDropdown: 0
-      _serializedIsActive: 1
-    - _showDropdown: 0
-      _serializedIsActive: 1
     _target: {fileID: 481003343}
-  - _keys:
-    - DefaultBehaviorEditor._SceneType.EditProperty
-    _values:
-    - _showDropdown: 0
-      _serializedIsActive: 1
-    _target: {fileID: 0}
-  - _keys:
-    - DefaultBehaviorEditor._SceneType.EditProperty
-    _values:
-    - _showDropdown: 0
-      _serializedIsActive: 1
-    _target: {fileID: 0}
 --- !u!4 &1305508065
 Transform:
   m_ObjectHideFlags: 1
@@ -748,7 +718,7 @@ RectTransform:
   m_GameObject: {fileID: 1839128031}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.0671627, y: 0.0671627, z: 0.0671627}
+  m_LocalScale: {x: 0.081058435, y: 0.081058435, z: 0.081058435}
   m_Children:
   - {fileID: 1758152649}
   m_Father: {fileID: 481003347}
@@ -786,7 +756,7 @@ RectTransform:
   m_GameObject: {fileID: 1976043569}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 90}
-  m_LocalScale: {x: 0.0671627, y: 0.0671627, z: 0.0671627}
+  m_LocalScale: {x: 0.081058435, y: 0.081058435, z: 0.081058435}
   m_Children:
   - {fileID: 1181481851}
   m_Father: {fileID: 481003347}
