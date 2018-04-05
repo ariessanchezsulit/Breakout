@@ -33,21 +33,28 @@ namespace Sandbox.Shooting
 
     public class ShootingSandbox : SceneObject
     {
+        public const string BALL = "Ball";
         public const float CENTER_RING = 0.5f;
+        
+        [InspectorCategory("Object")] public Slider VelocityScale;
+        [InspectorCategory("Object")] public Slider HorizontalScale;
+        [InspectorCategory("Object")] public Slider VerticalScale;
+        [InspectorCategory("Object")] public Slider SwipeDistance;
 
-        public TargetPosition TargetPosition;
-        public Rigidbody RingRef;
-        public Rigidbody BallRef;
-        public PrefabManager Balls;
-        public Text Score;
+        [InspectorCategory("Object")] public InputField Duration;
+        [InspectorCategory("Object")] public InputField GravityScale;
 
-        [InspectorRange(0f, 2f)]
-        public float VelocityScaler = 0.25f;
+        [InspectorCategory("Object")] public TargetPosition TargetPosition;
+        [InspectorCategory("Object")] public PlayerPosition PlayerPosition;
+        [InspectorCategory("Object")] public Rigidbody RingRef;
+        [InspectorCategory("Object")] public Rigidbody BallRef;
+        [InspectorCategory("Object")] public PrefabManager Balls;
+        [InspectorCategory("Object")] public Text Score;
 
+        [InspectorCategory("Data")] public ShootingData Data;
+        
         private Projectile Ball;
         private int ScoreValue = 0;
-
-        public AnimationCurve SwipeCurve;
         
         private void Start()
         {
@@ -55,10 +62,7 @@ namespace Sandbox.Shooting
             recognizer.gestureRecognizedEvent += (r) =>
             {
                 VectorAccuracy result = CheckAccuracy(r.endPoint - r.startPoint);
-                Debug.LogErrorFormat("Accuracy:{0} Angle:{1} Velocity:{2}\n", result.Accuracy, result.Angle, r.swipeVelocity);
-                
-                BallRef.GetComponent<Projectile>().AdjustDuration(Mathf.Clamp01(r.swipeVelocity / 50f));
-                Ball.AdjustDuration(Mathf.Clamp01(r.swipeVelocity / 50f));
+                float durationScale = Mathf.Clamp01(r.swipeVelocity / 50f);
 
                 TargetPosition.UpdateShotTarget(1f - (result.Angle / 180f));
                 Throw(r.swipeVelocity);
@@ -66,6 +70,21 @@ namespace Sandbox.Shooting
 
             TouchKit.addGestureRecognizer(recognizer);
 
+            BallRef.gameObject.SetActive(false);
+            Ball = GetBall();
+
+            // Reset data from Scriptable object
+            Ball.Duration = Data.FlightDuration;
+            Ball.GravityScale = Data.GravityScale;
+            PlayerPosition.UpadteHorizontalPosition(Data.XPosition);
+            PlayerPosition.UpdateVerticalPosition(Data.ZPosition);
+            VelocityScale.value = Data.SwipeWeight;
+            SwipeDistance.value = Data.SwipeMin;
+            recognizer.UpdateMinimumDistance(Data.SwipeMin);
+
+            Duration.GetComponent<InputValues>().UpdateDisplay(Ball.Duration);
+            GravityScale.GetComponent<InputValues>().UpdateDisplay(Ball.GravityScale);
+            
             this.Receive<OnScoreSignal>()
                 .Subscribe(_ =>
                 {
@@ -73,9 +92,38 @@ namespace Sandbox.Shooting
                     Score.text = string.Format("{0}", ScoreValue);
                 })
                 .AddTo(this);
+            
+            VelocityScale.OnValueChangedAsObservable()
+                .Subscribe(_ => Data.SwipeWeight = _)
+                .AddTo(this);
 
-            BallRef.gameObject.SetActive(false);
-            Ball = GetBall();
+            HorizontalScale.OnValueChangedAsObservable()
+                .Subscribe(_ => PlayerPosition.UpadteHorizontalPosition(_))
+                .AddTo(this);
+
+            VerticalScale.OnValueChangedAsObservable()
+               .Subscribe(_ => PlayerPosition.UpdateVerticalPosition(_))
+               .AddTo(this);
+
+            SwipeDistance.OnValueChangedAsObservable()
+                .Subscribe(_ => recognizer.UpdateMinimumDistance(_))
+                .AddTo(this);
+
+            Duration.OnValueChangedAsObservable()
+                .Subscribe(_ =>
+                {
+                    Ball.Duration = _.ToFloat();
+                    BallRef.GetComponent<Projectile>().Duration = _.ToFloat();
+                })
+                .AddTo(this);
+
+            GravityScale.OnValueChangedAsObservable()
+                .Subscribe(_ =>
+                {
+                    Ball.GravityScale = _.ToFloat();
+                    BallRef.GetComponent<Projectile>().GravityScale = _.ToFloat();
+                })
+                .AddTo(this);
         }
         
         private void FixedUpdate()
@@ -90,10 +138,6 @@ namespace Sandbox.Shooting
         public void Throw()
         {
             TargetPosition.UpdateShotTarget(CENTER_RING);
-            BallRef.GetComponent<Projectile>().AdjustDuration(1f);
-            Ball.AdjustDuration(1f);
-
-            Debug.LogErrorFormat("Accuracy:{0} Angle:{1} Velocity:{2}\n", 1f, 90f, Ball.GetVelocity().magnitude);
             
             Ball.Throw();
 
@@ -107,30 +151,26 @@ namespace Sandbox.Shooting
 
         public void Throw(float swipeVelocity)
         {
-            Vector3 velocity = (RingRef.transform.position - Ball.transform.position).normalized * swipeVelocity * VelocityScaler;
-            //Vector3 velocity = Ball.GetVelocity().normalized * swipeVelocity * VelocityScaler;
+            Vector3 velocity = (RingRef.transform.position - Ball.transform.position).normalized * swipeVelocity * Data.SwipeWeight;
             velocity = Ball.Throw(velocity);
 
             // Enable collider
             Ball.GetComponent<Collider>().enabled = true;
             Ball.GetComponent<SwarmItem>().minimumLifeSpan = 10f;
-
-            //Debug.LogErrorFormat("Velocity:{0}\n", velocity.magnitude);
-
+            
             // Create new ball
             Ball = GetBall();
         }
 
         public Projectile GetBall()
         {
-            Rigidbody projectile = Balls.Request("Ball").GetComponent<Rigidbody>();
+            Rigidbody projectile = Balls.Request(BALL).GetComponent<Rigidbody>();
             projectile.position = Vector3.zero;
             projectile.useGravity = false;
             projectile.velocity = Vector3.zero;
             projectile.angularVelocity = Vector3.zero;
             projectile.gameObject.SetActive(true);
-
-            //projectile.transform.localPosition = BallRef.transform.localPosition;
+            
             projectile.transform.position = BallRef.transform.position;
             projectile.transform.localScale = BallRef.transform.localScale;
             projectile.transform.localRotation = BallRef.transform.localRotation;

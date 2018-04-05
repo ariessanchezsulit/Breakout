@@ -27,5 +27,41 @@ namespace Common.Extensions
 
             return tex;
         }
+        
+        public static int ToInt(this string str)
+        {
+            int result = -1;
+
+            int.TryParse(str, out result);
+
+            return result;
+        }
+
+        public static float ToFloat(this string str)
+        {
+            float result = -1f;
+
+            float.TryParse(str, out result);
+
+            return result;
+        }
+
+        public static double ToDouble(this string str)
+        {
+            double result = -1.0f;
+
+            double.TryParse(str, out result);
+
+            return result;
+        }
+
+        public static long ToLong(this string str)
+        {
+            long result = -1;
+
+            long.TryParse(str, out result);
+
+            return result;
+        }
     }
 }

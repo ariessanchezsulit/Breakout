@@ -179,10 +179,5 @@ namespace Sandbox.Shooting
             //return Mathf.Max(timeOfFlight, timeOfFlight * DurationScaler);
             return timeOfFlight;
         }
-
-        public void AdjustDuration(float scale)
-        {
-            Duration = 1.25f * scale;
-        }
     }
 }

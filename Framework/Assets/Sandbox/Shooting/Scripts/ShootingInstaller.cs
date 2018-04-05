@@ -22,14 +22,5 @@ namespace Framework
 {
     public class ShootingInstaller : ConcreteInstaller, IInstaller
     {
-        public override void Add()
-        {
-
-        }
-
-        public override void Install()
-        {
-            base.Install();
-        }
     }
 }

@@ -13,9 +13,6 @@ namespace Sandbox.Shooting
 {
     public class PlayerPosition : BaseBehavior
     {
-        public Slider SliderH;
-        public Slider SliderV;
-
         [SerializeField]
         [InspectorRange(0f, 18f)]
         private float HorizontalThreshold = 8f;
@@ -23,26 +20,19 @@ namespace Sandbox.Shooting
         [SerializeField]
         [InspectorRange(0f, 8f)]
         private float VerticalThreshold = 8f;
-
-        private void Start()
+        
+        public void UpadteHorizontalPosition(float scale)
         {
-            SliderH.OnValueChangedAsObservable()
-                .Subscribe(slider =>
-                {
-                    Vector3 pos = transform.position;
-                    pos.x = HorizontalThreshold * slider;
-                    transform.position = pos;
-                })
-                .AddTo(this);
+            Vector3 pos = transform.position;
+            pos.x = HorizontalThreshold * scale;
+            transform.position = pos;
+        }
 
-            SliderV.OnValueChangedAsObservable()
-                .Subscribe(slider =>
-                {
-                    Vector3 pos = transform.position;
-                    pos.z = VerticalThreshold * slider;
-                    transform.position = pos;
-                })
-                .AddTo(this);
+        public void UpdateVerticalPosition(float scale)
+        {
+            Vector3 pos = transform.position;
+            pos.z = VerticalThreshold * scale;
+            transform.position = pos;
         }
     }
 }

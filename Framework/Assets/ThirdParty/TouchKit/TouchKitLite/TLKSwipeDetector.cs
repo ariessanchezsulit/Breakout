@@ -6,10 +6,10 @@ using UniRx.Triggers;
 using UnityEngine.UI;
 using FullInspector;
 using System;
-using Framework;
+using Synergy88;
 using Prime31;
 
-namespace Framework
+namespace Synergy88
 
 {
 

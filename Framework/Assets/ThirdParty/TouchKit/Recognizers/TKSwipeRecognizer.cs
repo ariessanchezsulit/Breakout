@@ -125,9 +125,13 @@ public class TKSwipeRecognizer : TKAbstractGestureRecognizer
 
     public TKSwipeRecognizer(float minimumDistanceCm)
     {
-        this._minimumDistance = minimumDistanceCm;
+        UpdateMinimumDistance(minimumDistanceCm);
     }
 
+    public void UpdateMinimumDistance(float minimumDistanceCm)
+    {
+        this._minimumDistance = minimumDistanceCm;
+    }
 
     private bool checkForSwipeCompletion(TKTouch touch)
     {
